@@ -5,12 +5,17 @@ class MyButton extends StatelessWidget {
   final String text;
   final Color color;
   final GlobalKey? formKey;
+  final double? width;
+  final double? fontSize;
+
   const MyButton({
     super.key,
     required this.onTap,
     required this.text,
     required this.color,
     this.formKey,
+    this.width,
+    this.fontSize,
   });
 
   @override
@@ -18,7 +23,7 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 180,
+        width: (width != null) ? width : 180,
         height: 60,
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
@@ -28,9 +33,9 @@ class MyButton extends StatelessWidget {
         child: Center(
             child: Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: (fontSize != null) ? fontSize : 18,
             fontWeight: FontWeight.w500,
           ),
         )),

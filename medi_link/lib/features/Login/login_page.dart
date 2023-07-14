@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import '../../common/button.dart';
 import '../../common/text_field.dart';
+import '../Register/unbording_page.dart';
 
 class LoginPage extends StatefulWidget {
-  final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -21,6 +23,16 @@ class _LoginPageState extends State<LoginPage> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          toolbarHeight: 0,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarBrightness: Brightness.dark,
+            statusBarColor: Colors.transparent,
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
         body: SingleChildScrollView(
           child: Container(
             color: const Color(0xfff2f2f2),
@@ -33,10 +45,10 @@ class _LoginPageState extends State<LoginPage> {
             child: SafeArea(
               child: Column(
                 children: [
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 14),
                   // welcome back message
                   Image.asset(
-                    'assets/images/logo-medilink.png',
+                    'assets/images/medilink-high-resolution-logo-color-on-transparent-background.png',
                     height: 190,
                     width: 190,
                   ),
@@ -122,31 +134,42 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   //go to register page
-                  Padding(
-                    padding: const EdgeInsets.only(top: 27.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Not a member?",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 114, 114, 114)),
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        GestureDetector(
-                          onTap: widget.onTap,
-                          child: const Text(
-                            "Resgister now",
-                            style: TextStyle(
-                              color: Color(0xff1479FF),
-                              fontWeight: FontWeight.bold,
-                            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(
+                            () => const UnbordingPage(),
+                            transition: Transition.rightToLeft,
+                            duration: const Duration(milliseconds: 250),
+                          );
+                        },
+                        child: Container(
+                          color: const Color(0xfff2f2f2),
+                          padding: const EdgeInsets.only(top: 25, bottom: 50),
+                          child: const Row(
+                            children: [
+                              Text(
+                                "Not a member?",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 114, 114, 114)),
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Text(
+                                "Resgister now",
+                                style: TextStyle(
+                                  color: Color(0xff1479FF),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
