@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../common/button.dart';
-import '../../common/text_field.dart';
-import '../Register/unbording_page.dart';
+import 'package:medilink/features/Forget%20Password/find_account_page.dart';
+import 'package:medilink/features/Login/controller/login_page_controller.dart';
+import '../../../common/button.dart';
+import '../../../common/text_field.dart';
+import '../../Register/screens/unbording/unbording_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,6 +15,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final LoginPageController _loginController = Get.put(LoginPageController());
+
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -109,9 +113,13 @@ class _LoginPageState extends State<LoginPage> {
                       )),
                   //email textfield
                   Container(
+                    height: 30,
+                    color: const Color(0xfff2f2f2),
                     padding: const EdgeInsets.only(left: 260),
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const FindAccountPage());
+                      },
                       child: const Text(
                         "Forgot?",
                         style: TextStyle(
@@ -121,13 +129,18 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 55),
+                  const SizedBox(height: 40),
 
                   //sign in button
                   MyButton(
                     color: const Color(0xff1479FF),
                     onTap: () {
-                      if (formKey.currentState!.validate()) {}
+                      if (formKey.currentState!.validate()) {
+                        _loginController.setEmail(emailTextController.text);
+                        _loginController
+                            .setPassword(passwordTextController.text);
+                        _loginController.login();
+                      }
                     },
                     text: 'Log In',
                     formKey: formKey,

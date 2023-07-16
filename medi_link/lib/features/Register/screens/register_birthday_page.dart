@@ -6,7 +6,9 @@ import 'package:medilink/common/button.dart';
 import 'package:medilink/common/register_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:medilink/features/Register/register_gender_page.dart';
+import 'package:medilink/features/Register/screens/register_gender_page.dart';
+
+import '../controller/register_page_controller.dart';
 
 class RegisterBirthdayPage extends StatefulWidget {
   const RegisterBirthdayPage({super.key});
@@ -32,6 +34,8 @@ class _RegisterBirthdayPageState extends State<RegisterBirthdayPage> {
               initialDateTime: DateTime(2023, 1, 1),
               onDateTimeChanged: (DateTime newDateTime) {
                 setState(() {
+                  Get.find<RegisterPageController>()
+                      .setAge(calculateAge(newDateTime));
                   birthDayController.text = dateFormat.format(newDateTime);
                 });
               },
@@ -152,4 +156,16 @@ class _RegisterBirthdayPageState extends State<RegisterBirthdayPage> {
       ),
     );
   }
+}
+
+int calculateAge(DateTime birthdate) {
+  final now = DateTime.now();
+  int age = now.year - birthdate.year;
+
+  if (now.month < birthdate.month ||
+      (now.month == birthdate.month && now.day < birthdate.day)) {
+    age--;
+  }
+
+  return age;
 }

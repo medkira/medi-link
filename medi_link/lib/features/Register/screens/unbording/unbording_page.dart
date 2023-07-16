@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:medilink/common/button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medilink/features/Register/content_model.dart';
-import 'package:medilink/features/Register/register_name_page.dart';
+import 'package:medilink/features/Register/screens/unbording/content_model.dart';
+import 'package:medilink/features/Register/screens/register_type_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UnbordingPage extends StatefulWidget {
@@ -108,7 +108,7 @@ class _UnbordingPageState extends State<UnbordingPage> {
                                 duration: const Duration(milliseconds: 400),
                                 curve: Curves.ease);
                             if (_currentIndex == contents.length - 1) {
-                              Get.to(() => const RegisNameterPage(),
+                              Get.to(() => const RegisterTypedPage(),
                                   transition: Transition.rightToLeft);
                             }
                           },

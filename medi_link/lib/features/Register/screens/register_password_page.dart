@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
 import 'package:medilink/common/register_text_field.dart';
-import 'package:medilink/features/Register/register_type_page.dart';
+import 'package:medilink/features/Register/screens/register_address_page.dart';
 import 'package:medilink/utils/form_validation.dart';
+
+import '../controller/register_page_controller.dart';
 
 class RegisterPasswordPage extends StatefulWidget {
   const RegisterPasswordPage({super.key});
@@ -78,15 +80,17 @@ class _RegisterEmaiPagePageState extends State<RegisterPasswordPage> {
                         obscureText: true,
                         next: false,
                         width: 345,
-                        validator: FormValidation.emaiValidation,
+                        validator: FormValidation.passwordValidation,
                       ),
                     ],
                   ),
                 ),
                 MyButton(
                   onTap: () {
-                    if (formKey.currentState!.validate() || true) {
-                      Get.to(() => const RegisterTypedPage(),
+                    if (formKey.currentState!.validate()) {
+                      Get.find<RegisterPageController>()
+                          .setPassword(passwordController.text);
+                      Get.to(() => const RegisterAddressPage(),
                           transition: Transition.rightToLeft);
                     }
                   },

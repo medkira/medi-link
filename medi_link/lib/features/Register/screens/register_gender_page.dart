@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medilink/features/Register/register_email_page.dart';
+import 'package:medilink/features/Register/screens/register_email_page.dart';
 
-import '../../common/button.dart';
+import '../../../common/button.dart';
+import '../controller/register_page_controller.dart';
 
 class RegisterGenderPage extends StatefulWidget {
   const RegisterGenderPage({super.key});
@@ -164,6 +164,9 @@ class _RegisterGenderPagePageState extends State<RegisterGenderPage> {
                 ),
                 MyButton(
                   onTap: () {
+                    Get.find<RegisterPageController>()
+                        .setGender(_isMaleChecked ? "Male" : "Female");
+
                     Get.to(() => const RegisterEmaiPage(),
                         transition: Transition.rightToLeft);
                   },

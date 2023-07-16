@@ -4,16 +4,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
 import 'package:medilink/common/register_text_field.dart';
-import 'package:medilink/features/Register/register_birthday_page.dart';
+import 'package:medilink/features/Register/screens/register_birthday_page.dart';
 
-class RegisNameterPage extends StatefulWidget {
-  const RegisNameterPage({super.key});
+import '../controller/register_page_controller.dart';
+
+class RegisterNamePage extends StatefulWidget {
+  const RegisterNamePage({super.key});
 
   @override
-  State<RegisNameterPage> createState() => _RegisNameterPageState();
+  State<RegisterNamePage> createState() => _RegisterNamePageState();
 }
 
-class _RegisNameterPageState extends State<RegisNameterPage> {
+class _RegisterNamePageState extends State<RegisterNamePage> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -87,6 +89,8 @@ class _RegisNameterPageState extends State<RegisNameterPage> {
               ),
               MyButton(
                 onTap: () {
+                  Get.find<RegisterPageController>().setUsername(
+                      "${firstNameController.text} ${lastNameController.text}");
                   Get.to(() => const RegisterBirthdayPage(),
                       transition: Transition.rightToLeft);
                 },
