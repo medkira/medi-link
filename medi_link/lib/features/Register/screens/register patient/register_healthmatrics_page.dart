@@ -4,27 +4,30 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
 import 'package:medilink/common/register_text_field.dart';
-import 'package:medilink/features/Register/screens/register_profileimage_page.dart';
+import 'package:medilink/features/Home/home_page.dart';
 
-import '../controller/register_page_controller.dart';
-
-class RegisterAddressPage extends StatefulWidget {
-  const RegisterAddressPage({super.key});
+class RegisterHealthMetricsPage extends StatefulWidget {
+  const RegisterHealthMetricsPage({super.key});
 
   @override
-  State<RegisterAddressPage> createState() =>
-      _RegisterAdressPagePagePageState();
+  State<RegisterHealthMetricsPage> createState() =>
+      _RegisterHealthMetricPagePageState();
 }
 
-class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
-  final countryController = TextEditingController();
-  final regionController = TextEditingController();
-  final addressLineController = TextEditingController();
-  final cityController = TextEditingController();
-  final stateController = TextEditingController();
-  final zipCodeController = TextEditingController();
-
+class _RegisterHealthMetricPagePageState
+    extends State<RegisterHealthMetricsPage> {
+  final _bloodTypeController = TextEditingController();
+  final _heightController = TextEditingController();
+  final _weightController = TextEditingController();
+  final _allergiesController = TextEditingController();
+  List<String> allergies = [];
   final formKey = GlobalKey<FormState>();
+  void _saveAllergies() {
+    final inputAllergies = _allergiesController.text;
+
+    allergies = inputAllergies.split(RegExp(r'\s+'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -48,12 +51,12 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 75, top: 10),
+                  padding: const EdgeInsets.only(right: 10, top: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Register your Address",
+                        "Personal Health Information",
                         style: TextStyle(
                           color: const Color(0xff1c1e21),
                           fontSize: 25,
@@ -63,7 +66,7 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        "Please provide your current address \n details below.",
+                        "Please fill in your personal health information.",
                         style: TextStyle(
                             fontFamily: GoogleFonts.roboto().fontFamily,
                             fontSize: 16,
@@ -80,53 +83,44 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                     children: [
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        controller: _bloodTypeController,
+                        hintText: 'Blood Type',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
                         padding: const EdgeInsets.only(top: 25, bottom: 10),
-                        controller: regionController,
-                        hintText: 'Region',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
                         // validator: FormValidation.passwordValidation,
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        controller: _heightController,
+                        hintText: 'Height (cm)',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
                         padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: addressLineController,
-                        hintText: 'Address Line',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
+
                         // validator: FormValidation.passwordValidation,
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        controller: _weightController,
+                        hintText: 'Weight (kg)',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
                         padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: cityController,
-                        hintText: 'City',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
+
                         // validator: FormValidation.passwordValidation,
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: stateController,
-                        hintText: 'State',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
-                        // validator: FormValidation.passwordValidation,
-                      ),
-                      MyTextfield(
-                        // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 35),
-                        controller: zipCodeController,
-                        hintText: 'Zip Code',
+                        controller: _allergiesController,
+                        hintText: 'Allgeries',
                         obscureText: false,
                         next: false,
                         width: 345,
-                        keyboardType: TextInputType.number,
+                        padding: const EdgeInsets.only(top: 15, bottom: 35),
 
                         // validator: FormValidation.passwordValidation,
                       ),
@@ -135,16 +129,11 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                 ),
                 MyButton(
                   onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      Get.find<RegisterPageController>().setAddress(
-                        addressLine: addressLineController.text,
-                        city: cityController.text,
-                        country: countryController.text,
-                        zipCode: zipCodeController.text,
-                      );
-                      Get.to(() => const RegisterProfileImagePage(),
-                          transition: Transition.rightToLeft);
-                    }
+                    _saveAllergies();
+
+                    print(allergies);
+                    // Get.to(() => const HomePage(),
+                    //     transition: Transition.rightToLeft);
                   },
                   text: "Next",
                   color: const Color(0xff1479FF),

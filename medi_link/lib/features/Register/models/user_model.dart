@@ -7,11 +7,12 @@
 
 class UserModel {
   final String username;
-  final String password;
+  final Security password;
   final String email;
   final String gender;
   final int age;
   final String userType;
+  final Address address;
 
   UserModel({
     required this.username,
@@ -20,6 +21,7 @@ class UserModel {
     required this.gender,
     required this.age,
     required this.userType,
+    required this.address,
   });
 
   Map<String, dynamic> toJson() {
@@ -32,6 +34,42 @@ class UserModel {
       "security": {
         'password': password,
       },
+      'address': address.toJson(),
+    };
+  }
+}
+
+class Address {
+  String country;
+  String addressLine;
+  String city;
+  String zipCode;
+
+  Address({
+    required this.country,
+    required this.addressLine,
+    required this.city,
+    required this.zipCode,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'country': country,
+      'addressLine': addressLine,
+      'city': city,
+      'zipCode': zipCode,
+    };
+  }
+}
+
+class Security {
+  String password;
+
+  Security({required this.password});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'password': password,
     };
   }
 }

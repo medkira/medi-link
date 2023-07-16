@@ -10,6 +10,7 @@ class MyTextfield extends StatefulWidget {
   final bool readOnly;
   final String? Function(String?, String)? validator;
   final EdgeInsets? padding;
+  final TextInputType? keyboardType;
 
   const MyTextfield({
     Key? key,
@@ -22,6 +23,7 @@ class MyTextfield extends StatefulWidget {
     this.onTap,
     this.readOnly = false,
     this.padding,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class _MyTextfieldState extends State<MyTextfield> {
           ? widget.padding
           : const EdgeInsets.only(top: 20, bottom: 25),
       child: TextFormField(
+        keyboardType: widget.keyboardType,
         readOnly: widget.readOnly,
         validator: (String? value) =>
             widget.validator?.call(value, widget.hintText),

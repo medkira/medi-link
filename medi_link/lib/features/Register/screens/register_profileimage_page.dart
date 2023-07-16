@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
-import 'package:medilink/features/Register/screens/register_address_page.dart';
+import 'package:medilink/features/Register/controller/register_page_type_navigation_controller.dart';
 import 'package:image_picker/image_picker.dart';
 // import '../controller/register_page_controller.dart';
 import 'dart:io';
@@ -126,8 +126,9 @@ class _RegisterProfileImagePagePagePageState
                 const SizedBox(height: 60),
                 MyButton(
                   onTap: () {
-                    Get.to(() => const RegisterAddressPage(),
-                        transition: Transition.rightToLeft);
+                    final RegisterTypeNavigatioController nav =
+                        Get.put(RegisterTypeNavigatioController());
+                    nav.navigateRegisterType();
                   },
                   text: "Next",
                   color: const Color(0xff1479FF),

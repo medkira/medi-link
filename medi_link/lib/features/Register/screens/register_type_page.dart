@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
-import 'package:medilink/features/Home/home_page.dart';
 import 'package:medilink/features/Register/screens/register_name_page.dart';
 
 import '../controller/register_page_controller.dart';
@@ -19,6 +18,7 @@ class RegisterTypedPage extends StatefulWidget {
 class _RegisterEmaiPagePageState extends State<RegisterTypedPage> {
   final RegisterPageController _registeController =
       Get.put(RegisterPageController());
+
   final passwordController = TextEditingController();
   String typeText = "";
   int _isPressed = -1;
@@ -217,8 +217,8 @@ class _RegisterEmaiPagePageState extends State<RegisterTypedPage> {
                     )),
                 MyButton(
                   onTap: () {
-                    // _registeController.setUserType(typeText);
-                    Get.find<RegisterPageController>().setUserType(typeText);
+                    _registeController.setUserType(typeText);
+                    // Get.find<RegisterPageController>().setUserType(typeText);
                     // Get.find<RegisterPageController>().register();
                     Get.to(() => const RegisterNamePage(),
                         transition: Transition.rightToLeft);

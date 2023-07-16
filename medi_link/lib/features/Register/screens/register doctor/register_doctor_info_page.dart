@@ -4,25 +4,23 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
 import 'package:medilink/common/register_text_field.dart';
-import 'package:medilink/features/Register/screens/register_profileimage_page.dart';
+import 'package:medilink/features/Home/home_page.dart';
+import 'package:medilink/features/Register/controller/register_page_controller.dart';
 
-import '../controller/register_page_controller.dart';
-
-class RegisterAddressPage extends StatefulWidget {
-  const RegisterAddressPage({super.key});
+class RegisterDoctorInfoPage extends StatefulWidget {
+  const RegisterDoctorInfoPage({super.key});
 
   @override
-  State<RegisterAddressPage> createState() =>
-      _RegisterAdressPagePagePageState();
+  State<RegisterDoctorInfoPage> createState() =>
+      _RegisterDoctorInfoPagePagePageState();
 }
 
-class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
-  final countryController = TextEditingController();
-  final regionController = TextEditingController();
-  final addressLineController = TextEditingController();
-  final cityController = TextEditingController();
-  final stateController = TextEditingController();
-  final zipCodeController = TextEditingController();
+class _RegisterDoctorInfoPagePagePageState
+    extends State<RegisterDoctorInfoPage> {
+  final _specialityController = TextEditingController();
+  final _qualificationController = TextEditingController();
+  final _experienceController = TextEditingController();
+  final _assuranceController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
   @override
@@ -48,12 +46,12 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 75, top: 10),
+                  padding: const EdgeInsets.only(right: 20, top: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Register your Address",
+                        "your professional details ",
                         style: TextStyle(
                           color: const Color(0xff1c1e21),
                           fontSize: 25,
@@ -63,12 +61,12 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        "Please provide your current address \n details below.",
+                        "Please provide your professional details \n This will help us understand your expertise \n and offer the best care to our patients.",
                         style: TextStyle(
                             fontFamily: GoogleFonts.roboto().fontFamily,
                             fontSize: 16,
                             color: const Color.fromARGB(255, 89, 88, 89),
-                            height: 1.25),
+                            height: 1.32),
                       ),
                     ],
                   ),
@@ -80,53 +78,44 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                     children: [
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        controller: _specialityController,
+                        hintText: 'Speciality',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
                         padding: const EdgeInsets.only(top: 25, bottom: 10),
-                        controller: regionController,
-                        hintText: 'Region',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
                         // validator: FormValidation.passwordValidation,
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        controller: _qualificationController,
+                        hintText: 'Sualification',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
                         padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: addressLineController,
-                        hintText: 'Address Line',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
+
                         // validator: FormValidation.passwordValidation,
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        controller: _experienceController,
+                        hintText: 'Experience (in years)',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
                         padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: cityController,
-                        hintText: 'City',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
+
                         // validator: FormValidation.passwordValidation,
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: stateController,
-                        hintText: 'State',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
-                        // validator: FormValidation.passwordValidation,
-                      ),
-                      MyTextfield(
-                        // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 35),
-                        controller: zipCodeController,
-                        hintText: 'Zip Code',
+                        controller: _assuranceController,
+                        hintText: 'Assurance',
                         obscureText: false,
                         next: false,
                         width: 345,
-                        keyboardType: TextInputType.number,
+                        padding: const EdgeInsets.only(top: 15, bottom: 35),
 
                         // validator: FormValidation.passwordValidation,
                       ),
@@ -135,16 +124,14 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                 ),
                 MyButton(
                   onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      Get.find<RegisterPageController>().setAddress(
-                        addressLine: addressLineController.text,
-                        city: cityController.text,
-                        country: countryController.text,
-                        zipCode: zipCodeController.text,
-                      );
-                      Get.to(() => const RegisterProfileImagePage(),
-                          transition: Transition.rightToLeft);
-                    }
+                    Get.to(() => const HomePage(),
+                        transition: Transition.rightToLeft);
+
+                    Get.find<RegisterPageController>().setDoctorInfo(
+                        speciality: _specialityController.text,
+                        qualification: _qualificationController.text,
+                        experience: _experienceController.text,
+                        assurance: _assuranceController.text);
                   },
                   text: "Next",
                   color: const Color(0xff1479FF),
