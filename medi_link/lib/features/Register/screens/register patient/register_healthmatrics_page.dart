@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/button.dart';
 import 'package:medilink/common/register_text_field.dart';
 import 'package:medilink/features/Home/home_page.dart';
+import 'package:medilink/features/Register/controller/register_page_controller.dart';
 
 class RegisterHealthMetricsPage extends StatefulWidget {
   const RegisterHealthMetricsPage({super.key});
@@ -130,8 +131,12 @@ class _RegisterHealthMetricPagePageState
                 MyButton(
                   onTap: () {
                     _saveAllergies();
-
-                    print(allergies);
+                    Get.find<RegisterPageController>().setHealthMetrics(
+                        bloodType: _bloodTypeController.text,
+                        height: _heightController.text,
+                        weight: _weightController.text);
+                    Get.find<RegisterPageController>().registerPatient();
+                    // print(allergies);
                     // Get.to(() => const HomePage(),
                     //     transition: Transition.rightToLeft);
                   },

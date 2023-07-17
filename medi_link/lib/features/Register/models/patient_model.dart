@@ -44,12 +44,14 @@ class Address {
   String addressLine;
   String city;
   String zipCode;
+  String region;
 
   Address({
     required this.country,
     required this.addressLine,
     required this.city,
     required this.zipCode,
+    required this.region,
   });
 
   Map<String, dynamic> toJson() {
@@ -58,6 +60,7 @@ class Address {
       'addressLine': addressLine,
       'city': city,
       'zipCode': zipCode,
+      'region': region,
     };
   }
 }

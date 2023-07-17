@@ -1,11 +1,11 @@
 import 'dart:convert';
-// import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:medilink/features/Register/models/doctor_model.dart'
     as DoctorModel;
 import 'package:medilink/features/Register/models/patient_model.dart'
     as PatientModel;
-// import 'package:medilink/features/Register/models/doctor_model.dart';
+// import 'package:medilink/features/Register/models/doctor_model.dart'
+import 'package:http/http.dart' as http;
 
 import '../models/user_model.dart';
 
@@ -30,6 +30,7 @@ class RegisterPageController extends GetxController {
   var bloodType = ''.obs;
   var height = ''.obs;
   var weight = ''.obs;
+  var region = ''.obs;
   List<RxString> currentAllergies = <RxString>[].obs;
   List<String> Allergies = <String>[].obs;
 
@@ -65,11 +66,13 @@ class RegisterPageController extends GetxController {
       {required String country,
       required String addressLine,
       required String city,
-      required String zipCode}) {
+      required String zipCode,
+      required String region}) {
     this.country.value = country;
     this.addressLine.value = addressLine;
     this.city.value = city;
     this.zipCode.value = zipCode;
+    this.region.value = region;
   }
 
   void setDoctorInfo({
@@ -102,54 +105,58 @@ class RegisterPageController extends GetxController {
   }
 
   void registerPatient() async {
+    final userInfo = UserModel(
+      username: username.value,
+      password: Security(password: password.value),
+      email: email.value,
+      gender: gender.value,
+      age: age.value,
+      userType: userType.value,
+      address: Address(
+          region: region.value,
+          country: country.value,
+          addressLine: addressLine.value,
+          city: city.value,
+          zipCode: zipCode.value),
+    );
+
+    final patientInfo = PatientModel.PatientModel(
+        type: userInfo.userType,
+        name: userInfo.username,
+        email: userInfo.email,
+        gender: userInfo.gender,
+        age: userInfo.age,
+        profileImage: profileImage.value,
+        address: PatientModel.Address(
+          addressLine: addressLine.value,
+          city: city.value,
+          country: country.value,
+          zipCode: zipCode.value,
+          region: region.value,
+        ),
+        security: PatientModel.Security(password: password.value),
+        healthMetrics: PatientModel.HealthMetrics(
+            bloodType: bloodType.value,
+            height: height.value,
+            weight: weight.value),
+        allergies: PatientModel.Allergies(current: Allergies));
+
+    final userInfoJson = jsonEncode(patientInfo.toJson());
+    print(patientInfo.age);
     try {
-      final userInfo = UserModel(
-        username: username.value,
-        password: Security(password: password.value),
-        email: email.value,
-        gender: gender.value,
-        age: age.value,
-        userType: userType.value,
-        address: Address(
-            country: country.value,
-            addressLine: addressLine.value,
-            city: city.value,
-            zipCode: zipCode.value),
-      );
-
-      final patientInfo = PatientModel.PatientModel(
-          type: userInfo.userType,
-          name: userInfo.username,
-          email: userInfo.email,
-          gender: userInfo.gender,
-          age: userInfo.age,
-          profileImage: profileImage.value,
-          address: PatientModel.Address(
-              addressLine: addressLine.value,
-              city: city.value,
-              country: country.value,
-              zipCode: zipCode.value),
-          security: PatientModel.Security(password: password.value),
-          healthMetrics: PatientModel.HealthMetrics(
-              bloodType: bloodType.value,
-              height: height.value,
-              weight: weight.value),
-          allergies: PatientModel.Allergies(current: Allergies));
-
-      final userInfoJson = jsonEncode(userInfo.toJson());
-
       print(userInfoJson);
 
-      // final response = await http.post(
-      //   Uri.parse('http://localhost:3000/api/v1/user/create'),
-      //   headers: {'Content-Type': 'application/json'},
-      //   body: userInfoJson,
-      // );
-      // if (response.statusCode == 200) {
-      // } else {
-      //   print('Request failed with status code: ${response.statusCode}');
-      // }
-      // Uri.parse(uri)
+      final response = await http.post(
+        Uri.parse('http://192.168.63.82:3000/api/v1/user/create'),
+        headers: {'Content-Type': 'application/json'},
+        body: userInfoJson,
+      );
+      if (response.statusCode == 200) {
+        print("user created");
+      } else {
+        print('Request failed with status code: ${response.statusCode}');
+      }
+      // Uri.parse(uri);
     } catch (err) {
       print('Error: $err');
     }
@@ -164,6 +171,7 @@ class RegisterPageController extends GetxController {
       age: age.value,
       userType: userType.value,
       address: Address(
+          region: region.value,
           country: country.value,
           addressLine: addressLine.value,
           city: city.value,
@@ -193,17 +201,18 @@ class RegisterPageController extends GetxController {
       experience: experience.value,
       assurance: assurance.value,
     );
-
+    final userInfoJson = jsonEncode(doctorInfo.toJson());
+    print(userInfoJson);
     try {
-      // final response = await http.post(
-      //   Uri.parse('http://localhost:3000/api/v1/user/doctor'),
-      //   headers: {'Content-Type': 'application/json'},
-      //   body: userInfoJson,
-      // );
-      // if (response.statusCode == 200) {
-      // } else {
-      //   print('Request failed with status code: ${response.statusCode}');
-      // }
+      final response = await http.post(
+        Uri.parse('http://192.168.1.33:3000/api/v1/user/doctor'),
+        headers: {'Content-Type': 'application/json'},
+        body: userInfoJson,
+      );
+      if (response.statusCode == 200) {
+      } else {
+        print('Request failed with status code: ${response.statusCode}');
+      }
       // Uri.parse(uri)
     } catch (err) {
       print('Error: $err');

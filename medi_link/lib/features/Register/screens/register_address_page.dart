@@ -120,9 +120,21 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 35),
+                        padding: const EdgeInsets.only(top: 15, bottom: 10),
                         controller: zipCodeController,
                         hintText: 'Zip Code',
+                        obscureText: false,
+                        next: true,
+                        width: 345,
+                        keyboardType: TextInputType.number,
+
+                        // validator: FormValidation.passwordValidation,
+                      ),
+                      MyTextfield(
+                        // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                        padding: const EdgeInsets.only(top: 15, bottom: 10),
+                        controller: countryController,
+                        hintText: 'country',
                         obscureText: false,
                         next: false,
                         width: 345,
@@ -141,6 +153,7 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                         city: cityController.text,
                         country: countryController.text,
                         zipCode: zipCodeController.text,
+                        region: regionController.text,
                       );
                       Get.to(() => const RegisterProfileImagePage(),
                           transition: Transition.rightToLeft);
