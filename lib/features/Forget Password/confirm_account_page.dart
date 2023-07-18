@@ -16,7 +16,8 @@ class _ConfirmAccountPagePageState extends State<ConfirmAccountPage> {
   final _fieldTwo = TextEditingController();
   final _fieldThree = TextEditingController();
   final _fieldFour = TextEditingController();
-  String _oTP = "";
+  String oTP = "";
+  String otpText = "";
 
   final formKey = GlobalKey<FormState>();
   @override
@@ -93,7 +94,8 @@ class _ConfirmAccountPagePageState extends State<ConfirmAccountPage> {
                 SizedBox(
                   height: 30,
                   child: Text(
-                    _oTP!.length < 4 ? 'Pleas enter OTP' : "",
+                    // _fieldOne   ? 'Pleas enter OTP' : "",
+                    otpText,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 247, 106, 137),
                       fontSize: 20,
@@ -104,7 +106,15 @@ class _ConfirmAccountPagePageState extends State<ConfirmAccountPage> {
                 MyButton(
                   onTap: () {
                     setState(() {
-                      _oTP = _fieldOne.text +
+                      if (_fieldOne.text.isEmpty ||
+                          _fieldTwo.text.isEmpty ||
+                          _fieldThree.text.isEmpty ||
+                          _fieldFour.text.isEmpty) {
+                        otpText = 'Pleas enter OTP';
+                      } else {
+                        otpText = '';
+                      }
+                      oTP = _fieldOne.text +
                           _fieldTwo.text +
                           _fieldThree.text +
                           _fieldFour.text;
