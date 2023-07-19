@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medilink/common/button.dart';
-import 'package:medilink/common/register_text_field.dart';
+import 'package:medilink/common/widgets/button.dart';
+import 'package:medilink/common/widgets/register_text_field.dart';
 import 'package:medilink/features/Register/screens/register_profileimage_page.dart';
 
 import '../controller/register_page_controller.dart';
@@ -108,16 +108,16 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                         width: 345,
                         // validator: FormValidation.passwordValidation,
                       ),
-                      MyTextfield(
-                        // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 10),
-                        controller: stateController,
-                        hintText: 'State',
-                        obscureText: false,
-                        next: true,
-                        width: 345,
-                        // validator: FormValidation.passwordValidation,
-                      ),
+                      // MyTextfield(
+                      //   // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
+                      //   padding: const EdgeInsets.only(top: 15, bottom: 10),
+                      //   controller: stateController,
+                      //   hintText: 'State',
+                      //   obscureText: false,
+                      //   next: true,
+                      //   width: 345,
+                      //   // validator: FormValidation.passwordValidation,
+                      // ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
                         padding: const EdgeInsets.only(top: 15, bottom: 10),
@@ -132,7 +132,7 @@ class _RegisterAdressPagePagePageState extends State<RegisterAddressPage> {
                       ),
                       MyTextfield(
                         // validator:() => FormValidation.emaiValidation(passwordController.text, "mail"),
-                        padding: const EdgeInsets.only(top: 15, bottom: 10),
+                        padding: const EdgeInsets.only(top: 15, bottom: 35),
                         controller: countryController,
                         hintText: 'country',
                         obscureText: false,

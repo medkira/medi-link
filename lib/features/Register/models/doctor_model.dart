@@ -1,5 +1,3 @@
-import '../../Login/model/login_model.dart';
-
 class DoctorModel {
   String type;
   String name;

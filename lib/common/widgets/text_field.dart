@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/form_validation.dart';
+import '../../utils/form_validation.dart';
 
 class MyTextfield extends StatefulWidget {
   final TextEditingController controller;
@@ -105,7 +105,7 @@ class _MyTextfieldState extends State<MyTextfield> {
           suffixIcon: widget.obscureText
               ? (_showText
                   ? IconButton(
-                      icon: const Icon(Icons.visibility),
+                      icon: const Icon(Icons.visibility_off),
                       onPressed: () {
                         setState(() {
                           _showText = !_showText;
@@ -113,7 +113,7 @@ class _MyTextfieldState extends State<MyTextfield> {
                       },
                     )
                   : IconButton(
-                      icon: const Icon(Icons.visibility_off),
+                      icon: const Icon(Icons.visibility),
                       onPressed: () {
                         setState(() {
                           _showText = !_showText;

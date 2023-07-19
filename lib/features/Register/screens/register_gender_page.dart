@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/features/Register/screens/register_email_page.dart';
 
-import '../../../common/button.dart';
+import '../../../common/widgets/button.dart';
 import '../controller/register_page_controller.dart';
 
 class RegisterGenderPage extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medilink/common/button.dart';
+import 'package:medilink/common/widgets/button.dart';
 
 class ConfirmAccountPage extends StatefulWidget {
   const ConfirmAccountPage({super.key});

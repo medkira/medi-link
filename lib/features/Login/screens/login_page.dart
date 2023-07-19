@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:medilink/features/Forget%20Password/find_account_page.dart';
+import 'package:medilink/features/Profile/screens/patient_profile_page.dart';
 import 'package:medilink/features/Login/controller/login_page_controller.dart';
-import '../../../common/button.dart';
-import '../../../common/text_field.dart';
+import '../../../common/widgets/button.dart';
+import '../../../common/widgets/text_field.dart';
 import '../../Register/screens/unbording/unbording_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
+        backgroundColor: const Color(0xfff2f2f2),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           toolbarHeight: 0,
@@ -38,8 +40,7 @@ class _LoginPageState extends State<LoginPage> {
           elevation: 0,
         ),
         body: SingleChildScrollView(
-          child: Container(
-            color: const Color(0xfff2f2f2),
+          child: SizedBox(
             height: MediaQuery.of(context).size.height,
             // decoration: const BoxDecoration(
             //   image: DecorationImage(
@@ -48,17 +49,15 @@ class _LoginPageState extends State<LoginPage> {
             // ),
             child: SafeArea(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 14),
-                  // welcome back message
-                  Image.asset(
-                    'assets/images/medilink-high-resolution-logo-color-on-transparent-background.png',
-                    height: 190,
-                    width: 190,
-                  ),
-
+                  // Image.asset(
+                  //   'assets/images/medilink-high-resolution-logo-color-on-transparent-background.png',
+                  //   height: 190,
+                  //   width: 190,
+                  // ),
                   const SizedBox(
-                    width: 310,
+                    width: 330,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -66,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                           "Sign in",
                           style: TextStyle(
                             color: Color.fromARGB(255, 57, 56, 56),
-                            fontSize: 30,
+                            fontSize: 34,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -77,14 +76,14 @@ class _LoginPageState extends State<LoginPage> {
                           "Please fill the input below here",
                           style: TextStyle(
                             color: Color.fromARGB(255, 89, 88, 89),
-                            fontSize: 15,
+                            fontSize: 15.5,
                           ),
                         ),
                       ],
                     ),
                   ),
 
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 30),
 
                   Form(
                       key: formKey,
@@ -92,16 +91,15 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           MyTextfield(
                             controller: emailTextController,
-                            hintText: 'email',
+                            hintText: 'Email',
                             obscureText: false,
                             icon: const Icon(Icons.mail),
                             next: true,
                           ),
-                          const SizedBox(height: 15),
                           //password textfield
                           MyTextfield(
                             controller: passwordTextController,
-                            hintText: 'password',
+                            hintText: 'Password',
                             obscureText: true,
                             icon: const Icon(
                               Icons.lock,
@@ -111,56 +109,61 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ],
                       )),
-                  //email textfield
+
                   Container(
                     height: 30,
                     color: const Color(0xfff2f2f2),
-                    padding: const EdgeInsets.only(left: 260),
+                    margin: const EdgeInsets.only(left: 220),
                     child: GestureDetector(
                       onTap: () {
                         Get.to(() => const FindAccountPage());
                       },
                       child: const Text(
-                        "Forgot?",
+                        "Forgot password?",
                         style: TextStyle(
-                            color: Color(0xff1479FF),
+                            color: Color.fromARGB(255, 77, 152, 251),
                             fontWeight: FontWeight.bold,
-                            fontSize: 15),
+                            fontSize: 14.5),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 15),
 
                   //sign in button
-                  MyButton(
-                    color: const Color(0xff1479FF),
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        _loginController.setEmail(emailTextController.text);
-                        _loginController
-                            .setPassword(passwordTextController.text);
-                        _loginController.login();
-                      }
-                    },
-                    text: 'Log In',
-                    formKey: formKey,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17, right: 17),
+                    child: MyButton(
+                      width: double.infinity,
+                      color: const Color.fromARGB(255, 77, 152, 251),
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          _loginController.setEmail(emailTextController.text);
+                          _loginController
+                              .setPassword(passwordTextController.text);
+                          _loginController.login();
+                        }
+                      },
+                      text: 'Log In',
+                      formKey: formKey,
+                    ),
                   ),
-
+                  const SizedBox(height: 25),
                   //go to register page
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
                         onTap: () {
+                          // UnbordingPage
                           Get.to(
-                            () => const UnbordingPage(),
+                            () => PatientProfilePage(),
                             transition: Transition.rightToLeft,
                             duration: const Duration(milliseconds: 250),
                           );
                         },
                         child: Container(
                           color: const Color(0xfff2f2f2),
-                          padding: const EdgeInsets.only(top: 25, bottom: 50),
+                          padding: const EdgeInsets.only(bottom: 30),
                           child: const Row(
                             children: [
                               Text(
@@ -174,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                               Text(
                                 "Resgister now",
                                 style: TextStyle(
-                                  color: Color(0xff1479FF),
+                                  color: Color.fromARGB(255, 77, 152, 251),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medilink/common/button.dart';
-import 'package:medilink/common/register_text_field.dart';
+import 'package:medilink/common/widgets/button.dart';
+import 'package:medilink/common/widgets/register_text_field.dart';
 import 'package:medilink/features/Register/screens/register_address_page.dart';
 import 'package:medilink/utils/form_validation.dart';
 

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:medilink/features/Login/model/login_model.dart';
 
-import '../../Home/home_page.dart';
+import '../../Profile/screens/patient_profile_page.dart';
 import '../../auth/controller/token_controller.dart';
 
 class LoginPageController extends GetxController {
@@ -38,7 +38,7 @@ class LoginPageController extends GetxController {
         var myToken = jsonResponse['token'];
         tokenController.setToken(myToken);
 
-        Get.to(() => const HomePage());
+        Get.to(() => PatientProfilePage());
       } else {
         Get.snackbar('Error', 'Invalid ');
       }

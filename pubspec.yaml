@@ -48,6 +48,8 @@ dependencies:
   hive_flutter: ^1.1.0
   jwt_decoder: ^2.0.1
   image_picker: ^1.0.1
+  flutter_sticky_header: ^0.6.5
+  animations: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/types_image/
+    - assets/images/medical_file_image/
 
   #   - images/a_dot_ham.jpeg
 

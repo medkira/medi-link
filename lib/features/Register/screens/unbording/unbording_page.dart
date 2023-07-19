@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:medilink/common/button.dart';
+import 'package:medilink/common/widgets/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/features/Register/screens/unbording/content_model.dart';
 import 'package:medilink/features/Register/screens/register_type_page.dart';
