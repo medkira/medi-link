@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/widgets/button.dart';
 import 'package:medilink/common/widgets/register_text_field.dart';
+import 'package:medilink/features/Profile/screens/patient_profile_page.dart';
 import 'package:medilink/features/Register/screens/register_address_page.dart';
 import 'package:medilink/utils/form_validation.dart';
 
@@ -90,8 +91,7 @@ class _RegisterEmaiPagePageState extends State<RegisterPasswordPage> {
                     if (formKey.currentState!.validate()) {
                       Get.find<RegisterPageController>()
                           .setPassword(passwordController.text);
-                      Get.to(() => const RegisterAddressPage(),
-                          transition: Transition.rightToLeft);
+                      Get.find<RegisterPageController>().registerPatient();
                     }
                   },
                   text: "Next",

@@ -33,7 +33,7 @@ class _MyTextfieldState extends State<MyTextfield> {
       child: TextFormField(
         validator: widget.obscureText
             ? (String? value) =>
-                FormValidation.passwordValidation(value, widget.hintText)
+                FormValidation.passwordValidationLogin(value, widget.hintText)
             : (String? value) =>
                 FormValidation.emaiValidation(value, widget.hintText),
         onChanged: (val) {

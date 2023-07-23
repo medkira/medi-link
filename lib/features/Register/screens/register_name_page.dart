@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/widgets/button.dart';
 import 'package:medilink/common/widgets/register_text_field.dart';
-import 'package:medilink/features/Register/screens/register_birthday_page.dart';
+import 'package:medilink/features/Register/screens/register_email_page.dart';
 
 import '../controller/register_page_controller.dart';
 
@@ -89,9 +89,12 @@ class _RegisterNamePageState extends State<RegisterNamePage> {
               ),
               MyButton(
                 onTap: () {
-                  Get.find<RegisterPageController>().setUsername(
-                      "${firstNameController.text} ${lastNameController.text}");
-                  Get.to(() => const RegisterBirthdayPage(),
+                  Get.find<RegisterPageController>()
+                      .setFirstname(firstNameController.text);
+                  Get.find<RegisterPageController>()
+                      .setLastname(lastNameController.text);
+
+                  Get.to(() => const RegisterEmaiPage(),
                       transition: Transition.rightToLeft);
                 },
                 text: "Next",

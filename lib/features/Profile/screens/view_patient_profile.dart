@@ -5,11 +5,10 @@ import 'package:medilink/common/widgets/button.dart';
 import 'package:medilink/common/widgets/categories_scroller.dart';
 import 'package:medilink/extensions/color.dart';
 import 'package:medilink/features/Profile/model/medicalfolder_model.dart';
-import 'package:medilink/features/Profile/model/quick_add_medicalfolder.dart';
 import 'package:medilink/features/Profile/screens/settings_page.dart';
 
-class PatientProfilePage extends StatelessWidget {
-  const PatientProfilePage({super.key});
+class ViewPatientProfilePage extends StatelessWidget {
+  const ViewPatientProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,64 +24,66 @@ class PatientProfilePage extends StatelessWidget {
               pinned: false,
               snap: false,
               floating: false,
-              expandedHeight: 310,
+              expandedHeight: 380,
               flexibleSpace: FlexibleSpaceBar(
                 background: Column(
                   children: [
-                    SizedBox(
-                      height: 310,
+                    Container(
+                      color: Globals.typingColor,
+                      height: 400,
                       child: DefaultTextStyle(
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          fontFamily: GoogleFonts.nunitoSans().fontFamily,
+                          fontFamily: GoogleFonts.roboto().fontFamily,
                         ),
-                        child: Stack(
-                          fit: StackFit.expand,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Positioned(
-                              top: 65,
-                              right: 0,
-                              child: GestureDetector(
-                                onTap: () => Get.to(() => SettingsPage(),
-                                    transition: Transition.rightToLeft),
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                      color: Globals.lightBlueColor,
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        bottomLeft: Radius.circular(10),
-                                      )),
-                                  padding: const EdgeInsets.only(right: 12),
-                                  height: 45,
-                                  width: 65,
-                                  child: const Icon(
-                                    Icons.settings,
-                                    size: 35,
-                                    color: Globals.primaryColor,
-                                  ),
-                                ),
+                            const SizedBox(height: 90),
+                            const CircleAvatar(
+                              backgroundColor:
+                                  Color.fromARGB(255, 146, 149, 151),
+                              radius: 85,
+                            ),
+                            Container(
+                              padding:
+                                  const EdgeInsets.only(top: 25, bottom: 25),
+                              child: const Text(
+                                "Name Name",
+                                style: TextStyle(fontSize: 25),
                               ),
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                const SizedBox(height: 84),
-                                const CircleAvatar(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 146, 149, 151),
-                                  radius: 85,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(top: 25),
-                                  child: const Text(
-                                    "Name Name",
-                                    style: TextStyle(fontSize: 23),
+                                MyButton(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(),
+                                    color: Globals.primaryColor,
                                   ),
+                                  onTap: null,
+                                  text: "Follow",
+                                  textStyle: const TextStyle(
+                                      color: Globals.scaffoldColor),
+                                  width: 150,
                                 ),
+                                MyButton(
+                                    height: 50,
+                                    onTap: null,
+                                    text: "Message",
+                                    textStyle: const TextStyle(
+                                        color: Globals.typingColor),
+                                    decoration: BoxDecoration(
+                                      color: Globals.scaffoldColor,
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    width: 150)
                               ],
-                            ),
+                            )
                           ],
                         ),
                       ),
@@ -97,9 +98,8 @@ class PatientProfilePage extends StatelessWidget {
                 childCount: 1,
                 (BuildContext context, index) {
                   return ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: MediaQuery.of(context).size.height -
-                          80, //the problem is this will look good only in the phone i debug on...
+                    constraints: const BoxConstraints(
+                      minHeight: 730.0,
                     ),
                     child: Container(
                       // height: MedicalFolderModel.items.length * 135 + 400,
@@ -107,8 +107,8 @@ class PatientProfilePage extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: Globals.scaffoldColor,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(23.0),
-                          topRight: Radius.circular(23.0),
+                          topLeft: Radius.circular(35.0),
+                          topRight: Radius.circular(35.0),
                         ),
                       ),
                       // color: Color.fromRGBO(237, 236, 236, 1),
@@ -119,68 +119,8 @@ class PatientProfilePage extends StatelessWidget {
                         // scrollDirection: Axis.vertical,
                         children: [
                           const SizedBox(height: 15),
-                          Row(
-                            children: [
-                              const SizedBox(
-                                width: 23,
-                              ),
-                              Text(
-                                "Quick add",
-                                style: TextStyle(
-                                  fontFamily: GoogleFonts.aBeeZee().fontFamily,
-                                  fontSize: 20,
-                                  color: Globals.darkGreyColor,
-                                ),
-                              ),
-                            ],
-                          ),
                           Padding(
                             padding: const EdgeInsets.all(11.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 226, 241, 247),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              // padding: const EdgeInsets.only(right: 12),
-                              // height: 100,
-                              width: 350,
-                              // width: MediaQuery.of(context).size.width,
-                              child: SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: QuickAddMedicalFolderModel.items
-                                      .map((data) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 20),
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            data['image'],
-                                            color: Globals.primaryColor,
-                                            height: 40,
-                                            fit: BoxFit.contain,
-                                          ),
-                                          const SizedBox(height: 15),
-                                          Text(
-                                            data['name'],
-                                            style: GoogleFonts.aBeeZee(
-                                              color: Globals.darkGreyColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 11, top: 11),
                             child: ExpendContainer(
                               closedContainer: Row(
                                 children: [
@@ -193,15 +133,12 @@ class PatientProfilePage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 5),
-                                  Text(
+                                  const Text(
                                     "Tap to View Prsonal File",
                                     style: TextStyle(
-                                      color: Globals.scaffoldColor,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily:
-                                          GoogleFonts.nunitoSans().fontFamily,
-                                    ),
+                                        color: Globals.scaffoldColor,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ],
                               ),
@@ -211,7 +148,7 @@ class PatientProfilePage extends StatelessWidget {
                             padding: const EdgeInsets.all(11.0),
                             child: ExpendContainer(
                               expendHeight:
-                                  MedicalFolderModel.items.length * 134,
+                                  MedicalFolderModel.items.length * 140,
                               closedContainer: Row(
                                 children: [
                                   SizedBox(
@@ -223,50 +160,44 @@ class PatientProfilePage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 5),
-                                  Text(
+                                  const Text(
                                     "Tap to View Medical File",
                                     style: TextStyle(
-                                      fontFamily:
-                                          GoogleFonts.nunitoSans().fontFamily,
-                                      color: Globals.scaffoldColor,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                        color: Globals.scaffoldColor,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ],
                               ),
-                              openContainerHeader: Expanded(
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          child: Image.asset(
-                                            'assets/images/medical-folder.png',
-                                            width: 50,
-                                            height: 50,
-                                            color: Globals.scaffoldColor,
-                                          ),
+                              openContainerHeader: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        child: Image.asset(
+                                          'assets/images/medical-folder.png',
+                                          width: 50,
+                                          height: 50,
+                                          color: Globals.scaffoldColor,
                                         ),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          "Medical File",
-                                          style: TextStyle(
+                                      ),
+                                      const SizedBox(width: 5),
+                                      const Text(
+                                        "Medical File",
+                                        style: TextStyle(
                                             color: Globals.scaffoldColor,
                                             fontSize: 22,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: GoogleFonts.nunitoSans()
-                                                .fontFamily,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              openContainer: const SingleChildScrollView(
-                                physics: NeverScrollableScrollPhysics(),
-                                child: CategoriesList(),
+                              openContainer: ListView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: const [
+                                  CategoriesList(),
+                                ],
                               ),
                             ),
                           ),
@@ -331,17 +262,17 @@ class _ExpendContainerState extends State<ExpendContainer> {
               curve: Curves.fastLinearToSlowEaseIn,
               height: isTapped
                   ? isExpanded
-                      ? 95
+                      ? 65
                       : 90
                   : isExpanded
                       ? (MediaQuery.of(context).size.height * 0.25)
                       : (widget.expendHeight != null)
                           ? widget.expendHeight
                           : 250,
-              width: isExpanded ? 360 : 350,
+              width: isExpanded ? 385 : 350,
               decoration: BoxDecoration(
                 color: Globals.primaryColor,
-                borderRadius: const BorderRadius.all(Radius.circular(11)),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: [
                   BoxShadow(
                     color: Globals.primaryColor.withOpacity(0.4),
@@ -360,14 +291,12 @@ class _ExpendContainerState extends State<ExpendContainer> {
                           children: [
                             (widget.closedContainer != null)
                                 ? widget.closedContainer!
-                                : Text(
+                                : const Text(
                                     'Tap to View Patient Data',
                                     style: TextStyle(
                                         color: Globals.scaffoldColor,
                                         fontSize: 22,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: GoogleFonts.nunitoSans()
-                                            .fontFamily),
+                                        fontWeight: FontWeight.w400),
                                   ),
                             Icon(
                               isTapped
@@ -389,15 +318,12 @@ class _ExpendContainerState extends State<ExpendContainer> {
                           children: [
                             (widget.openContainerHeader != null)
                                 ? widget.openContainerHeader!
-                                : Text(
+                                : const Text(
                                     'Patient Information',
                                     style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily:
-                                          GoogleFonts.nunitoSans().fontFamily,
-                                    ),
+                                        color: Colors.white,
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.w400),
                                   ),
                             Icon(
                               isTapped
@@ -426,8 +352,6 @@ class _ExpendContainerState extends State<ExpendContainer> {
                                     color: Colors.white.withOpacity(0.9),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w400,
-                                    fontFamily:
-                                        GoogleFonts.nunitoSans().fontFamily,
                                   ),
                                 ),
                         ),

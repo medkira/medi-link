@@ -217,11 +217,13 @@ class _RegisterEmaiPagePageState extends State<RegisterTypedPage> {
                     )),
                 MyButton(
                   onTap: () {
-                    _registeController.setUserType(typeText);
+                    _registeController.setUserRole(typeText);
                     // Get.find<RegisterPageController>().setUserType(typeText);
                     // Get.find<RegisterPageController>().register();
-                    Get.to(() => const RegisterNamePage(),
-                        transition: Transition.rightToLeft);
+                    if (typeText.isNotEmpty) {
+                      Get.to(() => const RegisterNamePage(),
+                          transition: Transition.rightToLeft);
+                    }
                   },
                   text: "Next",
                   color: const Color(0xff1479FF),
@@ -247,8 +249,8 @@ class TypeList {
 }
 
 List<TypeList> types = [
-  TypeList("doctor", 'assets/images/types_image/doctor.png'),
-  TypeList("patient", 'assets/images/types_image/patient.png'),
-  TypeList("laboratory", 'assets/images/types_image/laboratory.png'),
-  TypeList("pharmacy", 'assets/images/types_image/pharmacy.png'),
+  TypeList("Patient", 'assets/images/types_image/patient.png'),
+  TypeList("Doctor", 'assets/images/types_image/doctor.png'),
+  TypeList("Laboratory", 'assets/images/types_image/laboratory.png'),
+  TypeList("Pharmacy", 'assets/images/types_image/pharmacy.png'),
 ];

@@ -24,4 +24,11 @@ class FormValidation {
 
     return null;
   }
+
+  static String? passwordValidationLogin(String? value, String hintText) {
+    if (value == null || value.isEmpty) {
+      return "$hintText is required";
+    }
+    return null;
+  }
 }

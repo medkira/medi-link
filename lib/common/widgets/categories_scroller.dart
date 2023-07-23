@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/animation/opencontainer_animation.dart';
 import 'package:medilink/extensions/color.dart';
 import 'package:medilink/features/Profile/model/medicalfolder_model.dart';
@@ -38,9 +39,10 @@ class CategoriesList extends StatelessWidget {
                   const SizedBox(width: 25),
                   Text(
                     data['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
+                    style: TextStyle(
+                      fontSize: 23,
                       color: Globals.typingColor,
+                      fontFamily: GoogleFonts.nunitoSans().fontFamily,
                     ),
                   ),
                 ],

@@ -6,73 +6,64 @@
 // }
 
 class UserModel {
-  final String username;
-  final Security password;
+  final String name;
+  final String password;
   final String email;
-  final String gender;
-  final int age;
+  // final String gender;
   final String userType;
-  final Address address;
+  final String userRole;
+  final String firstName;
+  final String lastName;
 
   UserModel({
-    required this.username,
+    required this.firstName,
+    required this.lastName,
+    required this.name,
     required this.password,
     required this.email,
-    required this.gender,
-    required this.age,
+    // required this.gender,
     required this.userType,
-    required this.address,
+    required this.userRole,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'userType': userType,
-      'username': username,
+      'firstname': firstName,
+      'lastname': lastName,
       'email': email,
-      'gender': gender,
-      'age': age,
-      "security": {
-        'password': password,
-      },
-      'address': address.toJson(),
-    };
-  }
-}
-
-class Address {
-  String country;
-  String addressLine;
-  String city;
-  String zipCode;
-  String region;
-
-  Address({
-    required this.country,
-    required this.addressLine,
-    required this.city,
-    required this.zipCode,
-    required this.region,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'country': country,
-      'addressLine': addressLine,
-      'city': city,
-      'zipCode': zipCode,
-      'region': region,
-    };
-  }
-}
-
-class Security {
-  String password;
-
-  Security({required this.password});
-
-  Map<String, dynamic> toJson() {
-    return {
       'password': password,
+      'name': name,
+      'role': userRole,
+      'type': userType,
+      // 'gender': gender,
     };
   }
 }
+
+// class Address {
+//   String country;
+//   String addressLine;
+//   String city;
+//   String zipCode;
+//   String region;
+
+//   Address({
+//     required this.country,
+//     required this.addressLine,
+//     required this.city,
+//     required this.zipCode,
+//     required this.region,
+//   });
+
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'country': country,
+//       'addressLine': addressLine,
+//       'city': city,
+//       'zipCode': zipCode,
+//       'region': region,
+//     };
+//   }
+// }
+
+

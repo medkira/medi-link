@@ -5,7 +5,7 @@ class UserModel {
   UserModel({this.email, this.password});
   Map<String, dynamic> toJsoon() {
     return {
-      'username': email,
+      'email': email,
       'password': password,
     };
   }

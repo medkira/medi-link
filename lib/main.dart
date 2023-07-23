@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medilink/features/Login/screens/login_page.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:medilink/features/Profile/screens/patient_profile_page.dart';
+import 'package:medilink/features/Profile/screens/view_patient_profile.dart';
+import 'package:medilink/features/auth/controller/token_controller.dart';
 import 'package:path_provider/path_provider.dart';
 
 Box? tokenBox;
@@ -14,9 +17,17 @@ Future<Box> openHiveBox(String boxname) async {
   return Hive.openBox(boxname);
 }
 
+bool isValid() {
+  if (Get.find<TokenController>().getToken() != "") {
+    return true;
+  }
+  return false;
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   tokenBox = await openHiveBox("tokenBox");
+  Get.put(TokenController());
 
   runApp(const MyApp());
 }
@@ -33,7 +44,7 @@ class MyApp extends StatelessWidget {
           "assets/images/medilink-high-resolution-logo-color-on-transparent-background.png",
         ),
         splashIconSize: 140,
-        nextScreen: const LoginPage(),
+        nextScreen: isValid() ? const PatientProfilePage() : const LoginPage(),
       ),
     );
   }

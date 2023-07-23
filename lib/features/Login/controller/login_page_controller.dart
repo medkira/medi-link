@@ -26,10 +26,10 @@ class LoginPageController extends GetxController {
   void login() async {
     try {
       final user = UserModel(email: email.value, password: password.value);
-      final userJson = jsonEncode(user);
+      final userJson = jsonEncode(user.toJsoon());
 
       final response = await http.post(
-        Uri.parse('http://localhost:3000/api/v1/auth/login'),
+        Uri.parse('http://192.168.1.18:8800/api/auth/login'),
         headers: {'Content-Type': 'application/json'},
         body: userJson,
       );
@@ -38,7 +38,7 @@ class LoginPageController extends GetxController {
         var myToken = jsonResponse['token'];
         tokenController.setToken(myToken);
 
-        Get.to(() => PatientProfilePage());
+        Get.to(() => const PatientProfilePage());
       } else {
         Get.snackbar('Error', 'Invalid ');
       }
