@@ -26,6 +26,7 @@ class LoginPageController extends GetxController {
   void login() async {
     try {
       final user = UserModel(email: email.value, password: password.value);
+      print(user.email);
       final userJson = jsonEncode(user.toJsoon());
 
       final response = await http.post(

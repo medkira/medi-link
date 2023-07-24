@@ -14,10 +14,10 @@ class RegisterPasswordPage extends StatefulWidget {
   const RegisterPasswordPage({super.key});
 
   @override
-  State<RegisterPasswordPage> createState() => _RegisterEmaiPagePageState();
+  State<RegisterPasswordPage> createState() => _RegisterPasswordPageState();
 }
 
-class _RegisterEmaiPagePageState extends State<RegisterPasswordPage> {
+class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
   final passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();

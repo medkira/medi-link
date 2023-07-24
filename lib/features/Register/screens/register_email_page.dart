@@ -86,7 +86,7 @@ class _RegisterEmaiPagePageState extends State<RegisterEmaiPage> {
                 ),
                 MyButton(
                   onTap: () {
-                    print(FocusManager.instance.primaryFocus);
+                    // print(FocusManager.instance.primaryFocus);
                     if (formKey.currentState!.validate()) {
                       FocusManager.instance.primaryFocus?.unfocus();
                       Future.delayed(

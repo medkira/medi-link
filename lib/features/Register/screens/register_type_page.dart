@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medilink/common/widgets/button.dart';
 import 'package:medilink/features/Register/screens/register_name_page.dart';
-
 import '../controller/register_page_controller.dart';
 
 class RegisterTypedPage extends StatefulWidget {
   const RegisterTypedPage({super.key});
 
   @override
-  State<RegisterTypedPage> createState() => _RegisterEmaiPagePageState();
+  State<RegisterTypedPage> createState() => RegisterTypedPageState();
 }
 
-class _RegisterEmaiPagePageState extends State<RegisterTypedPage> {
+class RegisterTypedPageState extends State<RegisterTypedPage> {
   final RegisterPageController _registeController =
       Get.put(RegisterPageController());
 
@@ -81,7 +79,7 @@ class _RegisterEmaiPagePageState extends State<RegisterTypedPage> {
                     ],
                   ),
                 ),
-                //i was will do like this :)  ez and fast but no my big
+                //it was will  like this :)  ez and fast but no my big
                 //brain wanted to learn GridView yeh... it took my 3h  to do it... at least its  clean code now :') ...
                 // Container(
                 //   margin: const EdgeInsets.all(30),

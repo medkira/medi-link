@@ -13,10 +13,10 @@ class RegisterProfileImagePage extends StatefulWidget {
 
   @override
   State<RegisterProfileImagePage> createState() =>
-      _RegisterProfileImagePagePagePageState();
+      _RegisterProfileImagePagePageState();
 }
 
-class _RegisterProfileImagePagePagePageState
+class _RegisterProfileImagePagePageState
     extends State<RegisterProfileImagePage> {
   File? _image;
 

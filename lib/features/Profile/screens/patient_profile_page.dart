@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medilink/common/widgets/button.dart';
+// import 'package:medilink/common/widgets/button.dart';
 import 'package:medilink/common/widgets/categories_scroller.dart';
 import 'package:medilink/extensions/color.dart';
 import 'package:medilink/features/Profile/model/medicalfolder_model.dart';
@@ -10,7 +10,7 @@ import 'package:medilink/features/Profile/screens/settings_page.dart';
 
 class PatientProfilePage extends StatelessWidget {
   const PatientProfilePage({super.key});
-
+  final String username = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,9 +76,9 @@ class PatientProfilePage extends StatelessWidget {
                                 ),
                                 Container(
                                   padding: const EdgeInsets.only(top: 25),
-                                  child: const Text(
-                                    "Name Name",
-                                    style: TextStyle(fontSize: 23),
+                                  child: Text(
+                                    username,
+                                    style: const TextStyle(fontSize: 23),
                                   ),
                                 ),
                               ],
