@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:medilink/main.dart';
 
 class TokenController extends GetxController {
   late String token;

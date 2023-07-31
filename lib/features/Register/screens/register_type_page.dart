@@ -79,7 +79,106 @@ class RegisterTypedPageState extends State<RegisterTypedPage> {
                     ],
                   ),
                 ),
-                //it was will  like this :)  ez and fast but no my big
+                Container(
+                  margin: const EdgeInsets.all(30),
+                  // padding: const EdgeInsets.only(
+                  //     left: 15, right: 15, top: 25, bottom: 25),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 490,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromRGBO(213, 212, 218, 1),
+                    ),
+                    borderRadius: BorderRadius.circular(18),
+                    color: const Color.fromARGB(255, 244, 242, 242),
+                  ),
+                  child: GridView.count(
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    children: types.asMap().entries.map((type) {
+                      final int index = type.key;
+                      return GestureDetector(
+                        onTap: () => _handlePress(index),
+                        child: Container(
+                          margin: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 5,
+                              strokeAlign: 0,
+                              color: (_isPressed == index)
+                                  ? const Color(0xff1479FF)
+                                  : const Color.fromARGB(255, 244, 242, 242),
+                            ),
+                            color: const Color.fromARGB(255, 232, 232, 232),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          // width: 100, why this did work..?
+                          // height: 100,
+                          child: Container(
+                            padding: const EdgeInsets.all(18),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: Image.asset(
+                              type.value.img,
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    height: 50,
+                    child: Text(
+                      typeText,
+                      style: const TextStyle(
+                        color: Color(0xff1479FF),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )),
+                MyButton(
+                  onTap: () {
+                    _registeController.setUserRole(typeText);
+                    // Get.find<RegisterPageController>().setUserType(typeText);
+                    // Get.find<RegisterPageController>().register();
+                    if (typeText.isNotEmpty) {
+                      Get.to(() => const RegisterNamePage(),
+                          transition: Transition.rightToLeft);
+                    }
+                  },
+                  text: "Next",
+                  color: const Color(0xff1479FF),
+                  width: 350,
+                  fontSize: 20,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TypeList {
+  final String type, img;
+
+  TypeList(
+    this.type,
+    this.img,
+  );
+}
+
+List<TypeList> types = [
+  TypeList("Patient", 'assets/images/types_image/patient.png'),
+  TypeList("Doctor", 'assets/images/types_image/doctor.png'),
+  TypeList("Laboratory", 'assets/images/types_image/laboratory.png'),
+  TypeList("Pharmacy", 'assets/images/types_image/pharmacy.png'),
+];
+
+
+ //it was will  like this :)  ez and fast but no my big
                 //brain wanted to learn GridView yeh... it took my 3h  to do it... at least its  clean code now :') ...
                 // Container(
                 //   margin: const EdgeInsets.all(30),
@@ -154,101 +253,3 @@ class RegisterTypedPageState extends State<RegisterTypedPage> {
                 //     ],
                 //   ),
                 // ),
-                Container(
-                  margin: const EdgeInsets.all(30),
-                  // padding: const EdgeInsets.only(
-                  //     left: 15, right: 15, top: 25, bottom: 25),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 490,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color.fromRGBO(213, 212, 218, 1),
-                    ),
-                    borderRadius: BorderRadius.circular(18),
-                    color: const Color.fromARGB(255, 244, 242, 242),
-                  ),
-                  child: GridView.count(
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    children: types.asMap().entries.map((type) {
-                      final int index = type.key;
-                      return GestureDetector(
-                        onTap: () => _handlePress(index),
-                        child: Container(
-                          margin: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 5,
-                              strokeAlign: 0,
-                              color: (_isPressed == index)
-                                  ? const Color(0xff1479FF)
-                                  : const Color.fromARGB(255, 244, 242, 242),
-                            ),
-                            color: const Color.fromARGB(255, 232, 232, 232),
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          // width: 100, why this did work..?
-                          // height: 100,
-                          child: Container(
-                            padding: const EdgeInsets.all(18),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: Image.asset(
-                              type.value.img,
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-
-                Container(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    height: 50,
-                    child: Text(
-                      typeText,
-                      style: const TextStyle(
-                        color: Color(0xff1479FF),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )),
-                MyButton(
-                  onTap: () {
-                    _registeController.setUserRole(typeText);
-                    // Get.find<RegisterPageController>().setUserType(typeText);
-                    // Get.find<RegisterPageController>().register();
-                    if (typeText.isNotEmpty) {
-                      Get.to(() => const RegisterNamePage(),
-                          transition: Transition.rightToLeft);
-                    }
-                  },
-                  text: "Next",
-                  color: const Color(0xff1479FF),
-                  width: 350,
-                  fontSize: 20,
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TypeList {
-  final String type, img;
-
-  TypeList(
-    this.type,
-    this.img,
-  );
-}
-
-List<TypeList> types = [
-  TypeList("Patient", 'assets/images/types_image/patient.png'),
-  TypeList("Doctor", 'assets/images/types_image/doctor.png'),
-  TypeList("Laboratory", 'assets/images/types_image/laboratory.png'),
-  TypeList("Pharmacy", 'assets/images/types_image/pharmacy.png'),
-];

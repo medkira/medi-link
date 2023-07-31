@@ -4,24 +4,33 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'package:medilink/common/widgets/button.dart';
 import 'package:medilink/common/widgets/categories_scroller.dart';
 import 'package:medilink/extensions/color.dart';
+import 'package:medilink/features/Login/controller/fetch_user_data_controller.dart';
+import 'package:medilink/features/Login/controller/user_data_controller.dart';
 import 'package:medilink/features/Profile/model/medicalfolder_model.dart';
 import 'package:medilink/features/Profile/model/quick_add_medicalfolder.dart';
 import 'package:medilink/features/Profile/screens/settings_page.dart';
 
 class PatientProfilePage extends StatelessWidget {
-  const PatientProfilePage({super.key});
-  final String username = "";
+  final FetchUserDataController userDataController =
+      Get.put(FetchUserDataController());
+  PatientProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    // final GetUserDataController userDataController =
+    //     Get.put(GetUserDataController());
+    // Future data = Get.find<GetUserDataController>().getUserData();
+    // print("DATA--------------------------------DATA--------------------");
+    // print(data["data"]["name"]);
     return Scaffold(
-      backgroundColor: Globals.scaffoldColor,
       body: Container(
         color: Globals.typingColor,
         child: CustomScrollView(
           // physics: const BouncingScrollPhysics(),
           slivers: <Widget>[
             SliverAppBar(
-              backgroundColor: Globals.typingColor,
+              backgroundColor:
+                  Globals.typingColor, // Color.fromARGB(255, 28, 100, 132),
               pinned: false,
               snap: false,
               floating: false,
@@ -76,11 +85,32 @@ class PatientProfilePage extends StatelessWidget {
                                 ),
                                 Container(
                                   padding: const EdgeInsets.only(top: 25),
-                                  child: Text(
-                                    username,
-                                    style: const TextStyle(fontSize: 23),
-                                  ),
+                                  child: Obx(() {
+                                    String username =
+                                        userDataController.username.value;
+                                    return Text(
+                                      username,
+                                      style: const TextStyle(fontSize: 23),
+                                    );
+                                  }),
                                 ),
+                                // Container(
+                                //   padding: const EdgeInsets.only(top: 25),
+                                //   child: Obx(
+                                //     () {
+                                //       Get.put(UserDataController());
+
+                                //       String username =
+                                //           Get.find<UserDataController>()
+                                //               .username
+                                //               .value;
+                                //       return Text(
+                                //         username,
+                                //         style: const TextStyle(fontSize: 23),
+                                //       );
+                                //     },
+                                //   ),
+                                // ),
                               ],
                             ),
                           ],
@@ -270,6 +300,7 @@ class PatientProfilePage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          // ExpansionTile(title: title)
                         ],
                       ),
                     ),

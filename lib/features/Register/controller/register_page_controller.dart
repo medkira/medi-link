@@ -138,7 +138,7 @@ class RegisterPageController extends GetxController {
     final userInfoJson = jsonEncode(userInfo.toJson());
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.18:8800/api/auth/signup'),
+        Uri.parse('http://192.168.51.82:8800/api/auth/signup'),
         headers: {'Content-Type': 'application/json'},
         body: userInfoJson,
       );
@@ -149,8 +149,7 @@ class RegisterPageController extends GetxController {
 
         Get.find<TokenController>().setToken(res['token']);
 
-        Get.to(() => const PatientProfilePage(),
-            transition: Transition.rightToLeft);
+        Get.to(() => PatientProfilePage(), transition: Transition.rightToLeft);
       } else {
         var res = jsonDecode(response.body);
         var message = res['message'];
@@ -183,17 +182,16 @@ class RegisterPageController extends GetxController {
     print(userInfoJson);
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.18:8800/api/auth/signup'),
+        Uri.parse('http://192.168.51.82:8800/api/auth/signup'),
         headers: {'Content-Type': 'application/json'},
         body: userInfoJson,
       );
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         // print("Doctor Created");
         var res = jsonDecode(response.body);
 
         Get.find<TokenController>().setToken(res['token']);
-        Get.to(() => const PatientProfilePage(),
-            transition: Transition.rightToLeft);
+        Get.to(() => PatientProfilePage(), transition: Transition.rightToLeft);
       } else {
         var res = jsonDecode(response.body);
         var message = res['message'];

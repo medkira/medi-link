@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:medilink/common/animation/opencontainer_animation.dart';
 import 'package:medilink/common/widgets/categories_scroller.dart';
 import 'package:medilink/extensions/color.dart';
+import 'package:medilink/features/Login/controller/fetch_user_data_controller.dart';
+import 'package:medilink/features/Login/controller/user_data_controller.dart';
 import 'package:medilink/features/Login/screens/login_page.dart';
 import 'package:medilink/features/auth/controller/token_controller.dart';
 
@@ -101,10 +103,33 @@ class SettingsPage extends StatelessWidget {
           MaterialButton(
             onPressed: () {
               Get.find<TokenController>().deleteToken();
+              Get.put(UserDataController());
+              Get.find<UserDataController>().deleteUserData();
               Get.offAll(() => const LoginPage());
             },
             child: const Text("logout"),
-          )
+          ),
+          MaterialButton(
+            onPressed: () {
+              Get.put(UserDataController());
+            },
+            child: const Text("TEST"),
+          ),
+
+          Container(
+            padding: const EdgeInsets.only(top: 25),
+            child: Obx(
+              () {
+                Get.put(UserDataController());
+
+                String username = Get.find<UserDataController>().username.value;
+                return Text(
+                  username,
+                  style: const TextStyle(fontSize: 23),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

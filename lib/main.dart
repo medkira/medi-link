@@ -8,7 +8,9 @@ import 'package:medilink/features/Profile/screens/view_patient_profile.dart';
 import 'package:medilink/features/auth/controller/token_controller.dart';
 import 'package:path_provider/path_provider.dart';
 
-Box? tokenBox;
+import 'features/Login/controller/fetch_user_data_controller.dart';
+
+// Box? tokenBox;
 
 Future<Box> openHiveBox(String boxname) async {
   if (!Hive.isBoxOpen(boxname)) {
@@ -26,7 +28,8 @@ bool isValid() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  tokenBox = await openHiveBox("tokenBox");
+  await openHiveBox("tokenBox");
+  await openHiveBox("userDataBox");
   Get.put(TokenController());
 
   runApp(const MyApp());
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
           "assets/images/medilink-high-resolution-logo-color-on-transparent-background.png",
         ),
         splashIconSize: 140,
-        nextScreen: isValid() ? const PatientProfilePage() : const LoginPage(),
+        nextScreen: isValid() ? PatientProfilePage() : const LoginPage(),
       ),
     );
   }

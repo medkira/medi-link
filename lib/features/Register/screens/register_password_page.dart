@@ -91,7 +91,7 @@ class _RegisterPasswordPageState extends State<RegisterPasswordPage> {
                     if (formKey.currentState!.validate()) {
                       Get.find<RegisterPageController>()
                           .setPassword(passwordController.text);
-                      Get.find<RegisterPageController>().registerPatient();
+                      Get.find<RegisterPageController>().register();
                     }
                   },
                   text: "Next",

@@ -3,7 +3,7 @@ class UserModel {
   String? password;
 
   UserModel({this.email, this.password});
-  Map<String, dynamic> toJsoon() {
+  Map<String, dynamic> toJson() {
     return {
       'email': email,
       'password': password,
